@@ -1,18 +1,25 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
+import MusicList from './components/MusicList';
+import NavBar from './components/NavBar';
+import Home from './components/Home'
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className='App'>
-        <h1>Boilerplate</h1>
-        <img id='comp-img' src='./computer.png'></img>
-        <p>Replace the starter code in this template with something cool</p>
-        <Login />
-    </div>
+    <>
+     <Router>
+      <NavBar />
+      <Routes>
+      <Route path="/" element={<Home />} />
+        <Route path="/music" element={<MusicList />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
+    </>
   );
-}
+};
 
 export default App;

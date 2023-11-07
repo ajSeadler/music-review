@@ -1,6 +1,7 @@
 const express = require('express');
 const apiRouter = express.Router();
 const jwt = require('jsonwebtoken');
+const { getMusic } = require('../db');
 
 const volleyball = require('volleyball')
 apiRouter.use(volleyball)
@@ -38,5 +39,16 @@ apiRouter.use('/users', usersRouter);
 apiRouter.use((err, req, res, next) => {
     res.status(500).send(err)
   })
+
+  apiRouter.get('/music', async (req, res, next) => {
+    try {
+      // Retrieve the music data from your database. You should implement this part.
+      const musicData = await getMusic(); // Replace with your function to get music data.
+  
+      res.json({ music: musicData }); // Send the music data as a JSON response.
+    } catch (error) {
+      next(error);
+    }
+  });
 
 module.exports = apiRouter;
